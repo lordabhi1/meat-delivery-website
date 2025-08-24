@@ -250,16 +250,21 @@
             padding: 12px;
             text-align: center;
             transition: all 0.3s;
-            cursor: pointer;
             position: relative;
             overflow: hidden;
         }
 
         .price-item:hover {
-            background: linear-gradient(135deg, #e74c3c, #c0392b);
-            color: white;
+            background: linear-gradient(135deg, #e8f5e8, #d4edda);
+            border-color: #27ae60;
+            color: #155724;
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
+            box-shadow: 0 5px 15px rgba(39, 174, 96, 0.2);
+        }
+
+        .price-item:hover .price-amount {
+            color: #27ae60;
+            transform: scale(1.05);
         }
 
         .price-item::before {
@@ -287,10 +292,7 @@
             font-size: 1.1rem;
             font-weight: bold;
             color: #e74c3c;
-        }
-
-        .price-item:hover .price-amount {
-            color: white;
+            transition: all 0.3s;
         }
 
         .bulk-pricing {
@@ -673,19 +675,19 @@
                     <div class="product-info">
                         <h3>Chicken Boneless</h3>
                         <div class="price-grid">
-                            <div class="price-item" onclick="quickOrder('chicken-boneless', '250g', 130)">
+                            <div class="price-item">
                                 <div class="price-quantity">250g</div>
                                 <div class="price-amount">₹130</div>
                             </div>
-                            <div class="price-item" onclick="quickOrder('chicken-boneless', '500g', 220)">
+                            <div class="price-item">
                                 <div class="price-quantity">500g</div>
                                 <div class="price-amount">₹220</div>
                             </div>
-                            <div class="price-item" onclick="quickOrder('chicken-boneless', '750g', 300)">
+                            <div class="price-item">
                                 <div class="price-quantity">750g</div>
                                 <div class="price-amount">₹300</div>
                             </div>
-                            <div class="price-item" onclick="quickOrder('chicken-boneless', '1kg', 370)">
+                            <div class="price-item">
                                 <div class="price-quantity">1kg</div>
                                 <div class="price-amount">₹370</div>
                             </div>
@@ -694,8 +696,10 @@
                             <h4>💰 Bulk Discounts</h4>
                             <p>2kg+ @ ₹335/kg • 4kg+ @ ₹305/kg</p>
                         </div>
-                        <button class="order-quick-btn" onclick="scrollToOrder('chicken-boneless')">🛒 Order Now</button>
-                        <button class="add-to-cart-btn" onclick="addToCart('chicken-boneless', 'Chicken Boneless', '500g', 220)">➕ Add to Cart</button>
+                        <div class="product-buttons">
+                            <button class="order-quick-btn" onclick="scrollToOrder('chicken-boneless')">🛒 Order Now</button>
+                            <button class="add-to-cart-btn" onclick="addToCart('chicken-boneless', 'Chicken Boneless', '500g', 220)">➕ Add to Cart</button>
+                        </div>
                     </div>
                 </div>
                 
@@ -705,19 +709,19 @@
                     <div class="product-info">
                         <h3>Chicken Cut</h3>
                         <div class="price-grid">
-                            <div class="price-item" onclick="quickOrder('chicken-cut', '250g', 140)">
+                            <div class="price-item">
                                 <div class="price-quantity">250g</div>
                                 <div class="price-amount">₹140</div>
                             </div>
-                            <div class="price-item" onclick="quickOrder('chicken-cut', '500g', 240)">
+                            <div class="price-item">
                                 <div class="price-quantity">500g</div>
                                 <div class="price-amount">₹240</div>
                             </div>
-                            <div class="price-item" onclick="quickOrder('chicken-cut', '750g', 330)">
+                            <div class="price-item">
                                 <div class="price-quantity">750g</div>
                                 <div class="price-amount">₹330</div>
                             </div>
-                            <div class="price-item" onclick="quickOrder('chicken-cut', '1kg', 400)">
+                            <div class="price-item">
                                 <div class="price-quantity">1kg</div>
                                 <div class="price-amount">₹400</div>
                             </div>
@@ -726,8 +730,10 @@
                             <h4>💰 Bulk Discounts</h4>
                             <p>2kg+ @ ₹355/kg • 4kg+ @ ₹330/kg</p>
                         </div>
-                        <button class="order-quick-btn" onclick="scrollToOrder('chicken-cut')">🛒 Order Now</button>
-                        <button class="add-to-cart-btn" onclick="addToCart('chicken-cut', 'Chicken Cut', '500g', 240)">➕ Add to Cart</button>
+                        <div class="product-buttons">
+                            <button class="order-quick-btn" onclick="scrollToOrder('chicken-cut')">🛒 Order Now</button>
+                            <button class="add-to-cart-btn" onclick="addToCart('chicken-cut', 'Chicken Cut', '500g', 240)">➕ Add to Cart</button>
+                        </div>
                     </div>
                 </div>
                 
@@ -737,19 +743,19 @@
                     <div class="product-info">
                         <h3>Chicken Thighs & Legs</h3>
                         <div class="price-grid">
-                            <div class="price-item" onclick="quickOrder('chicken-thighs-legs', '250g', 130)">
+                            <div class="price-item">
                                 <div class="price-quantity">250g</div>
                                 <div class="price-amount">₹130</div>
                             </div>
-                            <div class="price-item" onclick="quickOrder('chicken-thighs-legs', '500g', 220)">
+                            <div class="price-item">
                                 <div class="price-quantity">500g</div>
                                 <div class="price-amount">₹220</div>
                             </div>
-                            <div class="price-item" onclick="quickOrder('chicken-thighs-legs', '750g', 300)">
+                            <div class="price-item">
                                 <div class="price-quantity">750g</div>
                                 <div class="price-amount">₹300</div>
                             </div>
-                            <div class="price-item" onclick="quickOrder('chicken-thighs-legs', '1kg', 370)">
+                            <div class="price-item">
                                 <div class="price-quantity">1kg</div>
                                 <div class="price-amount">₹370</div>
                             </div>
@@ -758,8 +764,10 @@
                             <h4>💰 Bulk Discounts</h4>
                             <p>2kg+ @ ₹335/kg • 4kg+ @ ₹305/kg</p>
                         </div>
-                        <button class="order-quick-btn" onclick="scrollToOrder('chicken-thighs-legs')">🛒 Order Now</button>
-                        <button class="add-to-cart-btn" onclick="addToCart('chicken-thighs-legs', 'Chicken Thighs & Legs', '500g', 220)">➕ Add to Cart</button>
+                        <div class="product-buttons">
+                            <button class="order-quick-btn" onclick="scrollToOrder('chicken-thighs-legs')">🛒 Order Now</button>
+                            <button class="add-to-cart-btn" onclick="addToCart('chicken-thighs-legs', 'Chicken Thighs & Legs', '500g', 220)">➕ Add to Cart</button>
+                        </div>
                     </div>
                 </div>
             </div>
