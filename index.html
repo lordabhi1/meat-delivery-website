@@ -860,11 +860,12 @@
                 width: 50px;
                 height: 50px;
                 font-size: 1.2rem;
+                top: 100px;
             }
 
             .order-form {
                 margin: 0 1rem;
-                padding: 2rem;
+                padding: 1.5rem;
             }
 
             .price-grid {
@@ -876,19 +877,179 @@
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 10px;
+                padding: 1rem 0.5rem;
             }
 
             .cart-quantity-controls {
                 margin: 0;
+                align-self: flex-end;
             }
 
-            .whatsapp-float {
-                width: 60px;
-                height: 60px;
-                bottom: 30px;
-                right: 30px;
-                font-size: 30px;
-                line-height: 60px;
+            
+
+            /* Mobile-specific button improvements */
+            .order-quick-btn,
+            .add-to-cart-btn {
+                padding: 12px 20px;
+                font-size: 0.9rem;
+                margin-top: 15px;
+            }
+
+            .product-buttons {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .cart-button-container {
+                margin-top: 10px;
+            }
+
+            /* Mobile form improvements */
+            .form-group input,
+            .form-group select,
+            .form-group textarea {
+                padding: 12px;
+                font-size: 16px; /* Prevents zoom on iOS */
+            }
+
+            .btn-primary {
+                padding: 15px 30px;
+                font-size: 1rem;
+            }
+
+            /* Mobile cart improvements */
+            .cart-section {
+                padding: 1.5rem;
+                margin: 1.5rem 0;
+            }
+
+            .cart-item-name {
+                font-size: 1rem;
+            }
+
+            .cart-item-price {
+                font-size: 1.1rem;
+                align-self: flex-end;
+            }
+
+            .cart-total {
+                padding: 1.5rem;
+            }
+
+            .cart-total-amount {
+                font-size: 1.5rem;
+            }
+
+            /* Mobile product card improvements */
+            .product-card {
+                margin-bottom: 1rem;
+            }
+
+            .product-info {
+                padding: 1.5rem;
+            }
+
+            .product-info h3 {
+                font-size: 1.3rem;
+                margin-bottom: 1rem;
+            }
+
+            .price-item {
+                padding: 12px;
+            }
+
+            .price-quantity {
+                font-size: 0.9rem;
+            }
+
+            .price-amount {
+                font-size: 1.1rem;
+            }
+
+            .bulk-pricing {
+                padding: 15px;
+                margin-top: 15px;
+            }
+
+            .bulk-pricing h4 {
+                font-size: 1rem;
+            }
+
+            .bulk-pricing p {
+                font-size: 0.9rem;
+            }
+
+            .quantity-selector {
+                padding: 15px;
+                margin: 15px 0;
+            }
+
+            .quantity-dropdown {
+                padding: 10px 12px;
+                font-size: 16px; /* Prevents zoom on iOS */
+            }
+        }
+
+        /* Extra small screens (iPhone SE, etc.) */
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+                line-height: 1.2;
+            }
+
+            .hero-content p {
+                font-size: 1rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .section-title {
+                font-size: 2.2rem;
+            }
+
+            .section-subtitle {
+                font-size: 1rem;
+                padding: 0 10px;
+            }
+
+            .service-card,
+            .product-card {
+                margin: 0 5px 1.5rem 5px;
+            }
+
+            .service-card {
+                padding: 2rem 1.5rem;
+            }
+
+            .order-form {
+                margin: 0 0.5rem;
+                padding: 1rem;
+            }
+
+            .cart-section {
+                padding: 1rem;
+                margin: 1rem 0;
+            }
+
+            
+
+            .cart-icon {
+                width: 45px;
+                height: 45px;
+                right: 15px;
+                font-size: 1.1rem;
+            }
+
+            .cart-count {
+                width: 20px;
+                height: 20px;
+                font-size: 0.7rem;
+                top: -6px;
+                right: -6px;
             }
         }
 
@@ -897,19 +1058,48 @@
             position: fixed;
             top: 100px;
             right: 20px;
+            left: 20px;
+            max-width: 350px;
+            margin: 0 auto;
             background: linear-gradient(135deg, #27ae60, #229954);
             color: white;
             padding: 15px 25px;
-            border-radius: 30px;
+            border-radius: 25px;
             font-weight: bold;
             z-index: 10000;
             box-shadow: 0 6px 25px rgba(39, 174, 96, 0.4);
-            transform: translateX(300px);
+            transform: translateY(-150px);
             transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-align: center;
+            font-size: 0.9rem;
+            line-height: 1.4;
         }
 
         .toast.show {
-            transform: translateX(0);
+            transform: translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            .toast {
+                left: 15px;
+                right: 15px;
+                top: 80px;
+                padding: 12px 20px;
+                font-size: 0.85rem;
+                border-radius: 20px;
+                max-width: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .toast {
+                left: 10px;
+                right: 10px;
+                top: 70px;
+                padding: 10px 15px;
+                font-size: 0.8rem;
+                border-radius: 15px;
+            }
         }
 
         /* Enhanced floating WhatsApp button */
@@ -934,6 +1124,41 @@
         .whatsapp-float:hover {
             transform: scale(1.1);
             box-shadow: 0 8px 30px rgba(37, 211, 102, 0.5);
+        }
+
+        /* Mobile responsive WhatsApp button */
+        @media (max-width: 768px) {
+            .whatsapp-float {
+                width: 55px;
+                height: 55px;
+                bottom: 25px;
+                right: 25px;
+                font-size: 26px;
+                line-height: 55px;
+                box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            }
+
+            .whatsapp-float:hover {
+                transform: scale(1.05);
+                box-shadow: 0 6px 25px rgba(37, 211, 102, 0.5);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .whatsapp-float {
+                width: 50px;
+                height: 50px;
+                bottom: 20px;
+                right: 20px;
+                font-size: 22px;
+                line-height: 50px;
+                box-shadow: 0 3px 15px rgba(37, 211, 102, 0.4);
+            }
+
+            .whatsapp-float:hover {
+                transform: scale(1.03);
+                box-shadow: 0 5px 20px rgba(37, 211, 102, 0.5);
+            }
         }
     </style>
 </head>
@@ -1255,14 +1480,11 @@
 
         // Smart order form management
         function updateOrderFormDisplay() {
-            const manualFields = document.getElementById('manualOrderFields');
             const smartStatus = document.getElementById('smartOrderStatus');
             
-            if (cart.length > 0) {
-                manualFields.style.display = 'none';
+            if (cart.length > 0 && smartStatus) {
                 smartStatus.style.display = 'block';
-            } else {
-                manualFields.style.display = 'block';
+            } else if (smartStatus) {
                 smartStatus.style.display = 'none';
             }
         }
