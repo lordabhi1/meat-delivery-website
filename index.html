@@ -524,22 +524,64 @@
             font-size: 0.7rem;
         }
 
+        .quantity-selector {
+            margin: 15px 0;
+            padding: 15px;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 12px;
+            border: 2px solid #dee2e6;
+        }
+
+        .quantity-selector label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #2c3e50;
+            font-size: 0.9rem;
+        }
+
+        .quantity-dropdown {
+            width: 100%;
+            padding: 10px 12px;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .quantity-dropdown:hover {
+            border-color: #27ae60;
+        }
+
+        .quantity-dropdown:focus {
+            outline: none;
+            border-color: #27ae60;
+            box-shadow: 0 0 0 3px rgba(39, 174, 96, 0.1);
+        }
+
+        .cart-button-container {
+            margin-top: 15px;
+        }
+
         .add-to-cart-btn {
             background: linear-gradient(135deg, #27ae60, #229954);
             color: white;
             border: none;
-            padding: 8px 15px;
-            border-radius: 20px;
+            padding: 12px 20px;
+            border-radius: 25px;
             font-weight: bold;
             cursor: pointer;
-            font-size: 0.8rem;
-            margin-left: 10px;
+            font-size: 0.9rem;
+            width: 100%;
             transition: all 0.3s;
         }
 
         .add-to-cart-btn:hover {
             background: linear-gradient(135deg, #219a52, #1e8449);
-            transform: translateY(-1px);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(39, 174, 96, 0.3);
         }
 
         .cart-icon {
@@ -696,9 +738,20 @@
                             <h4>💰 Bulk Discounts</h4>
                             <p>2kg+ @ ₹335/kg • 4kg+ @ ₹305/kg</p>
                         </div>
+                        <div class="quantity-selector">
+                            <label for="chicken-boneless-qty">Select Quantity:</label>
+                            <select id="chicken-boneless-qty" class="quantity-dropdown">
+                                <option value="250g-130">250g - ₹130</option>
+                                <option value="500g-220" selected>500g - ₹220</option>
+                                <option value="750g-300">750g - ₹300</option>
+                                <option value="1kg-370">1kg - ₹370</option>
+                            </select>
+                        </div>
                         <div class="product-buttons">
                             <button class="order-quick-btn" onclick="scrollToOrder('chicken-boneless')">🛒 Order Now</button>
-                            <button class="add-to-cart-btn" onclick="addToCart('chicken-boneless', 'Chicken Boneless', '500g', 220)">➕ Add to Cart</button>
+                        </div>
+                        <div class="cart-button-container">
+                            <button class="add-to-cart-btn" onclick="addToCartFromSelector('chicken-boneless', 'Chicken Boneless')">➕ Add to Cart</button>
                         </div>
                     </div>
                 </div>
@@ -730,9 +783,20 @@
                             <h4>💰 Bulk Discounts</h4>
                             <p>2kg+ @ ₹355/kg • 4kg+ @ ₹330/kg</p>
                         </div>
+                        <div class="quantity-selector">
+                            <label for="chicken-cut-qty">Select Quantity:</label>
+                            <select id="chicken-cut-qty" class="quantity-dropdown">
+                                <option value="250g-140">250g - ₹140</option>
+                                <option value="500g-240" selected>500g - ₹240</option>
+                                <option value="750g-330">750g - ₹330</option>
+                                <option value="1kg-400">1kg - ₹400</option>
+                            </select>
+                        </div>
                         <div class="product-buttons">
                             <button class="order-quick-btn" onclick="scrollToOrder('chicken-cut')">🛒 Order Now</button>
-                            <button class="add-to-cart-btn" onclick="addToCart('chicken-cut', 'Chicken Cut', '500g', 240)">➕ Add to Cart</button>
+                        </div>
+                        <div class="cart-button-container">
+                            <button class="add-to-cart-btn" onclick="addToCartFromSelector('chicken-cut', 'Chicken Cut')">➕ Add to Cart</button>
                         </div>
                     </div>
                 </div>
@@ -764,9 +828,20 @@
                             <h4>💰 Bulk Discounts</h4>
                             <p>2kg+ @ ₹335/kg • 4kg+ @ ₹305/kg</p>
                         </div>
+                        <div class="quantity-selector">
+                            <label for="chicken-thighs-legs-qty">Select Quantity:</label>
+                            <select id="chicken-thighs-legs-qty" class="quantity-dropdown">
+                                <option value="250g-130">250g - ₹130</option>
+                                <option value="500g-220" selected>500g - ₹220</option>
+                                <option value="750g-300">750g - ₹300</option>
+                                <option value="1kg-370">1kg - ₹370</option>
+                            </select>
+                        </div>
                         <div class="product-buttons">
                             <button class="order-quick-btn" onclick="scrollToOrder('chicken-thighs-legs')">🛒 Order Now</button>
-                            <button class="add-to-cart-btn" onclick="addToCart('chicken-thighs-legs', 'Chicken Thighs & Legs', '500g', 220)">➕ Add to Cart</button>
+                        </div>
+                        <div class="cart-button-container">
+                            <button class="add-to-cart-btn" onclick="addToCartFromSelector('chicken-thighs-legs', 'Chicken Thighs & Legs')">➕ Add to Cart</button>
                         </div>
                     </div>
                 </div>
@@ -969,6 +1044,15 @@ Thank you for choosing FreshMeat! 🙏
         // Shopping Cart System
         let cart = [];
         let cartVisible = false;
+
+        function addToCartFromSelector(productId, productName) {
+            const selector = document.getElementById(productId + '-qty');
+            const selectedValue = selector.value;
+            const [quantity, price] = selectedValue.split('-');
+            const numericPrice = parseInt(price);
+            
+            addToCart(productId, productName, quantity, numericPrice);
+        }
 
         function addToCart(productId, productName, quantity, price) {
             const existingItem = cart.find(item => item.productId === productId && item.quantity === quantity);
