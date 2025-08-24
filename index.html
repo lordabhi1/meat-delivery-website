@@ -162,45 +162,193 @@
 
         .product-card {
             background: white;
-            border-radius: 15px;
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            border: 2px solid transparent;
         }
 
         .product-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(231, 76, 60, 0.2);
+            border-color: #e74c3c;
         }
 
         .product-image {
-            height: 200px;
-            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            height: 220px;
+            background: linear-gradient(135deg, #e74c3c, #c0392b, #a93226);
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 4rem;
             color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-image::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.6s;
+            opacity: 0;
+        }
+
+        .product-card:hover .product-image::before {
+            animation: shimmer 0.6s ease-out;
+            opacity: 1;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
         }
 
         .product-info {
-            padding: 1.5rem;
+            padding: 2rem;
         }
 
         .product-info h3 {
             margin-bottom: 1rem;
             color: #2c3e50;
+            font-size: 1.4rem;
+            font-weight: bold;
+            text-align: center;
         }
 
-        .price-list {
-            list-style: none;
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #27ae60;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            z-index: 2;
+        }
+
+        .price-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
             margin: 1rem 0;
         }
 
-        .price-list li {
-            display: flex;
-            justify-content: space-between;
-            padding: 0.5rem 0;
-            border-bottom: 1px solid #eee;
+        .price-item {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border: 2px solid #dee2e6;
+            border-radius: 12px;
+            padding: 12px;
+            text-align: center;
+            transition: all 0.3s;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .price-item:hover {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
+        }
+
+        .price-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .price-item:hover::before {
+            left: 100%;
+        }
+
+        .price-quantity {
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        .price-amount {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #e74c3c;
+        }
+
+        .price-item:hover .price-amount {
+            color: white;
+        }
+
+        .bulk-pricing {
+            background: linear-gradient(135deg, #27ae60, #229954);
+            color: white;
+            padding: 15px;
+            border-radius: 12px;
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .bulk-pricing h4 {
+            margin: 0 0 8px 0;
+            font-size: 1rem;
+        }
+
+        .bulk-pricing p {
+            margin: 0;
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .order-quick-btn {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 15px;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .order-quick-btn:hover {
+            background: linear-gradient(135deg, #c0392b, #a93226);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
+        }
+
+        .popular-tag {
+            position: absolute;
+            top: -5px;
+            left: 20px;
+            background: #f39c12;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 0 0 10px 10px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            z-index: 2;
+        }
+
+        .popular-tag::before {
+            content: '🔥';
+            margin-right: 5px;
         }
 
         /* Order Form */
@@ -255,26 +403,180 @@
             padding: 2rem 0;
         }
 
-        .whatsapp-float {
-            position: fixed;
-            width: 60px;
-            height: 60px;
-            bottom: 40px;
-            right: 40px;
-            background-color: #25d366;
-            color: white;
-            border-radius: 50%;
-            text-align: center;
-            font-size: 30px;
-            line-height: 60px;
-            z-index: 1000;
-            cursor: pointer;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-            transition: transform 0.3s;
+        .cart-section {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border: 2px solid #e74c3c;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            display: none;
         }
 
-        .whatsapp-float:hover {
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e74c3c;
+        }
+
+        .cart-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #e74c3c;
+        }
+
+        .cart-clear {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 5px 12px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .cart-item-info {
+            flex-grow: 1;
+        }
+
+        .cart-item-name {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 3px;
+        }
+
+        .cart-item-details {
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+
+        .cart-item-price {
+            font-weight: bold;
+            color: #e74c3c;
+            font-size: 1.1rem;
+        }
+
+        .cart-quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 0 15px;
+        }
+
+        .qty-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+
+        .qty-display {
+            min-width: 20px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .cart-total {
+            background: linear-gradient(135deg, #27ae60, #229954);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .cart-total-amount {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 5px 0;
+        }
+
+        .remove-item {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 3px 8px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 0.7rem;
+        }
+
+        .add-to-cart-btn {
+            background: linear-gradient(135deg, #27ae60, #229954);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 0.8rem;
+            margin-left: 10px;
+            transition: all 0.3s;
+        }
+
+        .add-to-cart-btn:hover {
+            background: linear-gradient(135deg, #219a52, #1e8449);
+            transform: translateY(-1px);
+        }
+
+        .cart-icon {
+            position: fixed;
+            top: 120px;
+            right: 40px;
+            background: #e74c3c;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+            z-index: 999;
+            transition: all 0.3s;
+        }
+
+        .cart-icon:hover {
             transform: scale(1.1);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #f39c12;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 0.7rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
         }
 
         @keyframes fadeInUp {
@@ -365,47 +667,99 @@
             <h2 class="section-title">Our Products</h2>
             <div class="products-grid">
                 <div class="product-card">
+                    <div class="popular-tag">BESTSELLER</div>
+                    <div class="product-badge">Fresh</div>
                     <div class="product-image">🍗</div>
                     <div class="product-info">
                         <h3>Chicken Boneless</h3>
-                        <ul class="price-list">
-                            <li><span>250g</span><span>₹130</span></li>
-                            <li><span>500g</span><span>₹220</span></li>
-                            <li><span>750g</span><span>₹300</span></li>
-                            <li><span>1kg</span><span>₹370</span></li>
-                            <li><span>2kg+</span><span>₹335/kg</span></li>
-                            <li><span>4kg+</span><span>₹305/kg</span></li>
-                        </ul>
+                        <div class="price-grid">
+                            <div class="price-item" onclick="quickOrder('chicken-boneless', '250g', 130)">
+                                <div class="price-quantity">250g</div>
+                                <div class="price-amount">₹130</div>
+                            </div>
+                            <div class="price-item" onclick="quickOrder('chicken-boneless', '500g', 220)">
+                                <div class="price-quantity">500g</div>
+                                <div class="price-amount">₹220</div>
+                            </div>
+                            <div class="price-item" onclick="quickOrder('chicken-boneless', '750g', 300)">
+                                <div class="price-quantity">750g</div>
+                                <div class="price-amount">₹300</div>
+                            </div>
+                            <div class="price-item" onclick="quickOrder('chicken-boneless', '1kg', 370)">
+                                <div class="price-quantity">1kg</div>
+                                <div class="price-amount">₹370</div>
+                            </div>
+                        </div>
+                        <div class="bulk-pricing">
+                            <h4>💰 Bulk Discounts</h4>
+                            <p>2kg+ @ ₹335/kg • 4kg+ @ ₹305/kg</p>
+                        </div>
+                        <button class="order-quick-btn" onclick="scrollToOrder('chicken-boneless')">🛒 Order Now</button>
+                        <button class="add-to-cart-btn" onclick="addToCart('chicken-boneless', 'Chicken Boneless', '500g', 220)">➕ Add to Cart</button>
                     </div>
                 </div>
                 
                 <div class="product-card">
+                    <div class="product-badge">Premium</div>
                     <div class="product-image">🔪</div>
                     <div class="product-info">
                         <h3>Chicken Cut</h3>
-                        <ul class="price-list">
-                            <li><span>250g</span><span>₹140</span></li>
-                            <li><span>500g</span><span>₹240</span></li>
-                            <li><span>750g</span><span>₹330</span></li>
-                            <li><span>1kg</span><span>₹400</span></li>
-                            <li><span>2kg+</span><span>₹355/kg</span></li>
-                            <li><span>4kg+</span><span>₹330/kg</span></li>
-                        </ul>
+                        <div class="price-grid">
+                            <div class="price-item" onclick="quickOrder('chicken-cut', '250g', 140)">
+                                <div class="price-quantity">250g</div>
+                                <div class="price-amount">₹140</div>
+                            </div>
+                            <div class="price-item" onclick="quickOrder('chicken-cut', '500g', 240)">
+                                <div class="price-quantity">500g</div>
+                                <div class="price-amount">₹240</div>
+                            </div>
+                            <div class="price-item" onclick="quickOrder('chicken-cut', '750g', 330)">
+                                <div class="price-quantity">750g</div>
+                                <div class="price-amount">₹330</div>
+                            </div>
+                            <div class="price-item" onclick="quickOrder('chicken-cut', '1kg', 400)">
+                                <div class="price-quantity">1kg</div>
+                                <div class="price-amount">₹400</div>
+                            </div>
+                        </div>
+                        <div class="bulk-pricing">
+                            <h4>💰 Bulk Discounts</h4>
+                            <p>2kg+ @ ₹355/kg • 4kg+ @ ₹330/kg</p>
+                        </div>
+                        <button class="order-quick-btn" onclick="scrollToOrder('chicken-cut')">🛒 Order Now</button>
+                        <button class="add-to-cart-btn" onclick="addToCart('chicken-cut', 'Chicken Cut', '500g', 240)">➕ Add to Cart</button>
                     </div>
                 </div>
                 
                 <div class="product-card">
+                    <div class="product-badge">Value</div>
                     <div class="product-image">🍖</div>
                     <div class="product-info">
                         <h3>Chicken Thighs & Legs</h3>
-                        <ul class="price-list">
-                            <li><span>250g</span><span>₹130</span></li>
-                            <li><span>500g</span><span>₹220</span></li>
-                            <li><span>750g</span><span>₹300</span></li>
-                            <li><span>1kg</span><span>₹370</span></li>
-                            <li><span>2kg+</span><span>₹335/kg</span></li>
-                            <li><span>4kg+</span><span>₹305/kg</span></li>
-                        </ul>
+                        <div class="price-grid">
+                            <div class="price-item" onclick="quickOrder('chicken-thighs-legs', '250g', 130)">
+                                <div class="price-quantity">250g</div>
+                                <div class="price-amount">₹130</div>
+                            </div>
+                            <div class="price-item" onclick="quickOrder('chicken-thighs-legs', '500g', 220)">
+                                <div class="price-quantity">500g</div>
+                                <div class="price-amount">₹220</div>
+                            </div>
+                            <div class="price-item" onclick="quickOrder('chicken-thighs-legs', '750g', 300)">
+                                <div class="price-quantity">750g</div>
+                                <div class="price-amount">₹300</div>
+                            </div>
+                            <div class="price-item" onclick="quickOrder('chicken-thighs-legs', '1kg', 370)">
+                                <div class="price-quantity">1kg</div>
+                                <div class="price-amount">₹370</div>
+                            </div>
+                        </div>
+                        <div class="bulk-pricing">
+                            <h4>💰 Bulk Discounts</h4>
+                            <p>2kg+ @ ₹335/kg • 4kg+ @ ₹305/kg</p>
+                        </div>
+                        <button class="order-quick-btn" onclick="scrollToOrder('chicken-thighs-legs')">🛒 Order Now</button>
+                        <button class="add-to-cart-btn" onclick="addToCart('chicken-thighs-legs', 'Chicken Thighs & Legs', '500g', 220)">➕ Add to Cart</button>
                     </div>
                 </div>
             </div>
@@ -472,7 +826,26 @@
                     <textarea id="special-instructions" name="special-instructions" rows="2"></textarea>
                 </div>
                 
-                <button type="submit" class="btn-primary" style="width: 100%;">Place Order via WhatsApp</button>
+                <div class="cart-section" id="cartSection">
+                    <div class="cart-header">
+                        <div class="cart-title">🛒 Your Cart</div>
+                        <button class="cart-clear" onclick="clearCart()">Clear All</button>
+                    </div>
+                    <div id="cartItems"></div>
+                    <div class="cart-total">
+                        <div>Total Amount</div>
+                        <div class="cart-total-amount" id="cartTotal">₹0</div>
+                        <button class="btn-primary" style="margin-top: 10px;" onclick="checkoutFromCart()">🛒 Checkout via WhatsApp</button>
+                    </div>
+                </div>
+
+                <div class="price-display" id="priceDisplay" style="background: #e8f5e8; padding: 15px; margin: 15px 0; border-radius: 8px; border-left: 4px solid #27ae60; display: none;">
+                    <h4 style="color: #27ae60; margin: 0 0 5px 0;">💰 Estimated Price</h4>
+                    <p id="calculatedPrice" style="font-size: 1.2em; font-weight: bold; color: #2c3e50; margin: 0;"></p>
+                    <p style="font-size: 0.9em; color: #7f8c8d; margin: 5px 0 0 0;">*Final price confirmed via WhatsApp</p>
+                </div>
+                
+                <button type="submit" class="btn-primary" style="width: 100%;">🛒 Place Order via WhatsApp</button>
             </form>
         </div>
     </section>
@@ -485,8 +858,14 @@
         </div>
     </footer>
 
+    <!-- Cart Icon -->
+    <div class="cart-icon" onclick="toggleCart()">
+        🛒
+        <div class="cart-count" id="cartCount" style="display: none;">0</div>
+    </div>
+
     <!-- WhatsApp Float Button -->
-    <div class="whatsapp-float" onclick="openWhatsApp()">
+    <div style="position: fixed; width: 60px; height: 60px; bottom: 40px; right: 40px; background-color: #25d366; color: white; border-radius: 50%; text-align: center; font-size: 30px; line-height: 60px; z-index: 1000; cursor: pointer; box-shadow: 0 4px 20px rgba(0,0,0,0.3); transition: transform 0.3s;" onclick="openWhatsApp()" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
         💬
     </div>
 
@@ -505,7 +884,7 @@
             });
         });
 
-        // Order form submission
+        // Order form submission with total calculation
         document.getElementById('orderForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
@@ -520,7 +899,28 @@
                 instructions: formData.get('special-instructions')
             };
 
-            // Create WhatsApp message
+            // Calculate price for single item order
+            const prices = {
+                'chicken-boneless': {
+                    '250g': 130, '500g': 220, '750g': 300, '1kg': 370, '2kg': 670, '4kg': 1220
+                },
+                'chicken-cut': {
+                    '250g': 140, '500g': 240, '750g': 330, '1kg': 400, '2kg': 710, '4kg': 1320
+                },
+                'chicken-thighs-legs': {
+                    '250g': 130, '500g': 220, '750g': 300, '1kg': 370, '2kg': 670, '4kg': 1220
+                },
+                'chicken-thighs': {
+                    '250g': 130, '500g': 220, '750g': 300, '1kg': 370, '2kg': 670, '4kg': 1220
+                },
+                'chicken-legs': {
+                    '250g': 130, '500g': 220, '750g': 300, '1kg': 370, '2kg': 670, '4kg': 1220
+                }
+            };
+
+            const totalPrice = prices[orderDetails.product] ? prices[orderDetails.product][orderDetails.quantity] : 'To be confirmed';
+
+            // Create WhatsApp message with total price
             const message = `
 🥩 *New Order from FreshMeat Website*
 
@@ -532,9 +932,11 @@ Phone: ${orderDetails.phone}
 ${orderDetails.address}
 
 🛒 *Order Details:*
-Product: ${orderDetails.product}
+Product: ${orderDetails.product.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase())}
 Quantity: ${orderDetails.quantity}
 Service: ${orderDetails.serviceType}
+
+💰 *TOTAL PRICE: ₹${totalPrice}*
 
 📝 *Special Instructions:*
 ${orderDetails.instructions || 'None'}
@@ -545,6 +947,8 @@ Thank you for choosing FreshMeat! 🙏
             // Send message directly to your WhatsApp number
             const whatsappUrl = `https://wa.me/918812976172?text=${encodeURIComponent(message)}`;
             window.open(whatsappUrl, '_blank');
+            
+            showToast('Order sent! Check WhatsApp 📱');
         });
 
         // WhatsApp float button
@@ -554,14 +958,253 @@ Thank you for choosing FreshMeat! 🙏
             window.open(whatsappUrl, '_blank');
         }
 
-        // Add some interactivity to service cards
-        document.querySelectorAll('.service-card').forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-10px) scale(1.02)';
+        // Shopping Cart System
+        let cart = [];
+        let cartVisible = false;
+
+        function addToCart(productId, productName, quantity, price) {
+            const existingItem = cart.find(item => item.productId === productId && item.quantity === quantity);
+            
+            if (existingItem) {
+                existingItem.qty += 1;
+            } else {
+                cart.push({
+                    productId: productId,
+                    productName: productName,
+                    quantity: quantity,
+                    price: price,
+                    qty: 1
+                });
+            }
+            
+            updateCartDisplay();
+            showCartIcon();
+            
+            // Show success feedback
+            showToast('Added to cart! 🛒');
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartDisplay();
+            if (cart.length === 0) {
+                hideCartIcon();
+            }
+        }
+
+        function updateQuantity(index, change) {
+            cart[index].qty += change;
+            if (cart[index].qty <= 0) {
+                removeFromCart(index);
+            } else {
+                updateCartDisplay();
+            }
+        }
+
+        function updateCartDisplay() {
+            const cartItems = document.getElementById('cartItems');
+            const cartTotal = document.getElementById('cartTotal');
+            const cartCount = document.getElementById('cartCount');
+            
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<p style="text-align: center; color: #6c757d; margin: 20px 0;">Your cart is empty</p>';
+                cartTotal.textContent = '₹0';
+                cartCount.style.display = 'none';
+                return;
+            }
+            
+            let total = 0;
+            let itemsHtml = '';
+            
+            cart.forEach((item, index) => {
+                const itemTotal = item.price * item.qty;
+                total += itemTotal;
+                
+                itemsHtml += `
+                    <div class="cart-item">
+                        <div class="cart-item-info">
+                            <div class="cart-item-name">${item.productName}</div>
+                            <div class="cart-item-details">${item.quantity} × ₹${item.price}</div>
+                        </div>
+                        <div class="cart-quantity-controls">
+                            <button class="qty-btn" onclick="updateQuantity(${index}, -1)">-</button>
+                            <span class="qty-display">${item.qty}</span>
+                            <button class="qty-btn" onclick="updateQuantity(${index}, 1)">+</button>
+                        </div>
+                        <div class="cart-item-price">₹${itemTotal}</div>
+                        <button class="remove-item" onclick="removeFromCart(${index})">×</button>
+                    </div>
+                `;
             });
             
-            card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0) scale(1)';
+            cartItems.innerHTML = itemsHtml;
+            cartTotal.textContent = `₹${total}`;
+            cartCount.textContent = cart.reduce((sum, item) => sum + item.qty, 0);
+            cartCount.style.display = 'flex';
+        }
+
+        function toggleCart() {
+            const cartSection = document.getElementById('cartSection');
+            cartVisible = !cartVisible;
+            cartSection.style.display = cartVisible ? 'block' : 'none';
+            
+            if (cartVisible) {
+                cartSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        }
+
+        function showCartIcon() {
+            const cartIcon = document.querySelector('.cart-icon');
+            cartIcon.style.display = 'flex';
+        }
+
+        function hideCartIcon() {
+            const cartIcon = document.querySelector('.cart-icon');
+            const cartSection = document.getElementById('cartSection');
+            cartIcon.style.display = 'none';
+            cartSection.style.display = 'none';
+            cartVisible = false;
+        }
+
+        function clearCart() {
+            cart = [];
+            updateCartDisplay();
+            hideCartIcon();
+            showToast('Cart cleared! 🗑️');
+        }
+
+        function checkoutFromCart() {
+            if (cart.length === 0) {
+                showToast('Your cart is empty!');
+                return;
+            }
+
+            const formData = new FormData(document.getElementById('orderForm'));
+            const customerDetails = {
+                name: formData.get('name'),
+                phone: formData.get('phone'),
+                address: formData.get('address'),
+                serviceType: formData.get('service-type'),
+                instructions: formData.get('special-instructions')
+            };
+
+            // Validate required fields
+            if (!customerDetails.name || !customerDetails.phone || !customerDetails.address) {
+                showToast('Please fill in your details first!');
+                document.getElementById('order').scrollIntoView({ behavior: 'smooth' });
+                return;
+            }
+
+            let orderDetails = '';
+            let totalAmount = 0;
+            
+            cart.forEach(item => {
+                const itemTotal = item.price * item.qty;
+                totalAmount += itemTotal;
+                orderDetails += `\n• ${item.productName} - ${item.quantity} × ${item.qty} = ₹${itemTotal}`;
+            });
+
+            const message = `
+🥩 *Cart Order from FreshMeat Website*
+
+👤 *Customer Details:*
+Name: ${customerDetails.name}
+Phone: ${customerDetails.phone}
+
+📍 *Delivery Address:*
+${customerDetails.address}
+
+🛒 *Order Details:*${orderDetails}
+
+💰 *TOTAL AMOUNT: ₹${totalAmount}*
+
+🚚 *Service Type:* ${customerDetails.serviceType || 'Next Day Delivery'}
+
+📝 *Special Instructions:*
+${customerDetails.instructions || 'None'}
+
+Thank you for choosing FreshMeat! 🙏
+            `.trim();
+
+            const whatsappUrl = `https://wa.me/918812976172?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+            
+            // Clear cart after order
+            clearCart();
+            showToast('Order sent! Check WhatsApp 📱');
+        }
+
+        function showToast(message) {
+            // Create a simple toast notification
+            const toast = document.createElement('div');
+            toast.style.cssText = `
+                position: fixed;
+                top: 100px;
+                right: 20px;
+                background: #27ae60;
+                color: white;
+                padding: 12px 20px;
+                border-radius: 25px;
+                font-weight: bold;
+                z-index: 10000;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+                transform: translateX(300px);
+                transition: transform 0.3s ease-out;
+            `;
+            toast.textContent = message;
+            document.body.appendChild(toast);
+            
+            // Animate in
+            setTimeout(() => toast.style.transform = 'translateX(0)', 100);
+            
+            // Remove after 3 seconds
+            setTimeout(() => {
+                toast.style.transform = 'translateX(300px)';
+                setTimeout(() => document.body.removeChild(toast), 300);
+            }, 3000);
+        }
+
+        // Update the quick order function to also show total
+        function quickOrder(product, quantity, price) {
+            const message = `
+🥩 *Quick Order from FreshMeat Website*
+
+🛒 *Product*: ${product.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase())}
+⚖️ *Quantity*: ${quantity}
+💰 *Total Price*: ₹${price}
+
+Please confirm this order and provide delivery details.
+
+Thank you for choosing FreshMeat! 🙏
+            `.trim();
+
+            const whatsappUrl = `https://wa.me/918812976172?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        // Scroll to order section and pre-fill form
+        function scrollToOrder(product) {
+            document.getElementById('order').scrollIntoView({ behavior: 'smooth' });
+            
+            // Pre-fill the product in the order form
+            setTimeout(() => {
+                document.getElementById('product').value = product;
+                updatePrice();
+            }, 500);
+        }
+
+        // Add some interactivity to price items
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add click effects to price items
+            const priceItems = document.querySelectorAll('.price-item');
+            priceItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    // Add click animation
+                    this.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 150);
+                });
             });
         });
 
@@ -569,8 +1212,44 @@ Thank you for choosing FreshMeat! 🙏
         function updatePrice() {
             const product = document.getElementById('product').value;
             const quantity = document.getElementById('quantity').value;
-            // Add price calculation logic here
+            const priceDisplay = document.getElementById('priceDisplay');
+            const calculatedPrice = document.getElementById('calculatedPrice');
+            
+            if (!product || !quantity) {
+                priceDisplay.style.display = 'none';
+                return;
+            }
+
+            const prices = {
+                'chicken-boneless': {
+                    '250g': 130, '500g': 220, '750g': 300, '1kg': 370, '2kg': 670, '4kg': 1220
+                },
+                'chicken-cut': {
+                    '250g': 140, '500g': 240, '750g': 330, '1kg': 400, '2kg': 710, '4kg': 1320
+                },
+                'chicken-thighs-legs': {
+                    '250g': 130, '500g': 220, '750g': 300, '1kg': 370, '2kg': 670, '4kg': 1220
+                },
+                'chicken-thighs': {
+                    '250g': 130, '500g': 220, '750g': 300, '1kg': 370, '2kg': 670, '4kg': 1220
+                },
+                'chicken-legs': {
+                    '250g': 130, '500g': 220, '750g': 300, '1kg': 370, '2kg': 670, '4kg': 1220
+                }
+            };
+
+            if (prices[product] && prices[product][quantity]) {
+                const price = prices[product][quantity];
+                calculatedPrice.textContent = `₹${price}`;
+                priceDisplay.style.display = 'block';
+            } else {
+                priceDisplay.style.display = 'none';
+            }
         }
+
+        // Add event listeners to update price when selection changes
+        document.getElementById('product').addEventListener('change', updatePrice);
+        document.getElementById('quantity').addEventListener('change', updatePrice);
     </script>
 </body>
 </html>
