@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FreshMeat - Premium Meat Delivery Service</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #e74c3c;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #e74c3c;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23e74c3c" width="1200" height="600"/><circle fill="%23c0392b" cx="200" cy="150" r="50" opacity="0.5"/><circle fill="%23c0392b" cx="1000" cy="450" r="80" opacity="0.3"/></svg>');
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: white;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .btn-primary {
+            background: #e74c3c;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        .btn-primary:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
+        }
+
+        /* Services Section */
+        .services {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #2c3e50;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .service-card {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+            border-color: #e74c3c;
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Products Section */
+        .products {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-image {
+            height: 200px;
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: white;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-info h3 {
+            margin-bottom: 1rem;
+            color: #2c3e50;
+        }
+
+        .price-list {
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        .price-list li {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        /* Order Form */
+        .order-section {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .order-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #2c3e50;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #e74c3c;
+        }
+
+        /* Footer */
+        .footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 40px;
+            right: 40px;
+            background-color: #25d366;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 30px;
+            line-height: 60px;
+            z-index: 1000;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            transition: transform 0.3s;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-content p {
+                font-size: 1.1rem;
+            }
+            
+            .services-grid,
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav container">
+            <div class="logo">🥩 FreshMeat</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#products">Products</a></li>
+                <li><a href="#order">Order</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Fresh Meat Delivered to Your Doorstep</h1>
+                <p>Premium quality, hygienically processed meat with next-day delivery</p>
+                <a href="#order" class="btn-primary">Order Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <h2 class="section-title">Our Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🚚</div>
+                    <h3>Next Day Delivery</h3>
+                    <p>Fast and reliable delivery service ensuring your meat reaches you fresh and on time.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📅</div>
+                    <h3>Subscription Plans</h3>
+                    <p>Weekly and monthly subscription options to meet your regular meat requirements.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🧼</div>
+                    <h3>Hygiene Guaranteed</h3>
+                    <p>All meat is hygienically processed and properly washed to maintain the highest quality standards.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="products">
+        <div class="container">
+            <h2 class="section-title">Our Products</h2>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image">🍗</div>
+                    <div class="product-info">
+                        <h3>Chicken Boneless</h3>
+                        <ul class="price-list">
+                            <li><span>250g</span><span>₹130</span></li>
+                            <li><span>500g</span><span>₹220</span></li>
+                            <li><span>750g</span><span>₹300</span></li>
+                            <li><span>1kg</span><span>₹370</span></li>
+                            <li><span>2kg+</span><span>₹335/kg</span></li>
+                            <li><span>4kg+</span><span>₹305/kg</span></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image">🔪</div>
+                    <div class="product-info">
+                        <h3>Chicken Cut</h3>
+                        <ul class="price-list">
+                            <li><span>250g</span><span>₹140</span></li>
+                            <li><span>500g</span><span>₹240</span></li>
+                            <li><span>750g</span><span>₹330</span></li>
+                            <li><span>1kg</span><span>₹400</span></li>
+                            <li><span>2kg+</span><span>₹355/kg</span></li>
+                            <li><span>4kg+</span><span>₹330/kg</span></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image">🍖</div>
+                    <div class="product-info">
+                        <h3>Chicken Thighs & Legs</h3>
+                        <ul class="price-list">
+                            <li><span>250g</span><span>₹130</span></li>
+                            <li><span>500g</span><span>₹220</span></li>
+                            <li><span>750g</span><span>₹300</span></li>
+                            <li><span>1kg</span><span>₹370</span></li>
+                            <li><span>2kg+</span><span>₹335/kg</span></li>
+                            <li><span>4kg+</span><span>₹305/kg</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Order Section -->
+    <section id="order" class="order-section">
+        <div class="container">
+            <h2 class="section-title">Place Your Order</h2>
+            <form class="order-form" id="orderForm">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="address">Delivery Address</label>
+                    <textarea id="address" name="address" rows="3" required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="product">Select Product</label>
+                    <select id="product" name="product" required>
+                        <option value="">Choose Product</option>
+                        <option value="chicken-boneless">Chicken Boneless</option>
+                        <option value="chicken-cut">Chicken Cut</option>
+                        <option value="chicken-thighs-legs">Chicken Thighs & Legs</option>
+                        <option value="chicken-thighs">Chicken Thighs</option>
+                        <option value="chicken-legs">Chicken Legs</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="quantity">Quantity</label>
+                    <select id="quantity" name="quantity" required>
+                        <option value="">Select Quantity</option>
+                        <option value="250g">250g</option>
+                        <option value="500g">500g</option>
+                        <option value="750g">750g</option>
+                        <option value="1kg">1kg</option>
+                        <option value="2kg">2kg</option>
+                        <option value="4kg">4kg</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="service-type">Service Type</label>
+                    <select id="service-type" name="service-type" required>
+                        <option value="">Select Service</option>
+                        <option value="next-day">Next Day Delivery</option>
+                        <option value="weekly">Weekly Subscription</option>
+                        <option value="monthly">Monthly Subscription</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="special-instructions">Special Instructions (Optional)</label>
+                    <textarea id="special-instructions" name="special-instructions" rows="2"></textarea>
+                </div>
+                
+                <button type="submit" class="btn-primary" style="width: 100%;">Place Order via WhatsApp</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="footer">
+        <div class="container">
+            <p>&copy; 2024 FreshMeat. Your meat quality, our responsibility.</p>
+            <p>Contact us for fresh, hygienic meat delivery services</p>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Float Button -->
+    <div class="whatsapp-float" onclick="openWhatsApp()">
+        💬
+    </div>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Order form submission
+        document.getElementById('orderForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const orderDetails = {
+                name: formData.get('name'),
+                phone: formData.get('phone'),
+                address: formData.get('address'),
+                product: formData.get('product'),
+                quantity: formData.get('quantity'),
+                serviceType: formData.get('service-type'),
+                instructions: formData.get('special-instructions')
+            };
+
+            // Create WhatsApp message
+            const message = `
+🥩 *New Order from FreshMeat Website*
+
+👤 *Customer Details:*
+Name: ${orderDetails.name}
+Phone: ${orderDetails.phone}
+
+📍 *Delivery Address:*
+${orderDetails.address}
+
+🛒 *Order Details:*
+Product: ${orderDetails.product}
+Quantity: ${orderDetails.quantity}
+Service: ${orderDetails.serviceType}
+
+📝 *Special Instructions:*
+${orderDetails.instructions || 'None'}
+
+Thank you for choosing FreshMeat! 🙏
+            `.trim();
+
+            // Send message directly to your WhatsApp number
+            const whatsappUrl = `https://wa.me/918812976172?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        });
+
+        // WhatsApp float button
+        function openWhatsApp() {
+            const message = "Hello! I'm interested in your fresh meat delivery service. Can you help me with more information?";
+            const whatsappUrl = `https://wa.me/918812976172?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        // Add some interactivity to service cards
+        document.querySelectorAll('.service-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Price calculator
+        function updatePrice() {
+            const product = document.getElementById('product').value;
+            const quantity = document.getElementById('quantity').value;
+            // Add price calculation logic here
+        }
+    </script>
+</body>
+</html>
